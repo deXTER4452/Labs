@@ -19,6 +19,12 @@ public class VendingMachine
     public Dictionary<int, int> MoneyFloat { get; set; } = new Dictionary<int, int>();
     public Dictionary<Product, int> Inventory { get; set; } = new Dictionary<Product, int>();
     public List<Product> products { get; set; } = new List<Product>();
+    public VendingMachine(int serialNumber)
+    {
+        SerialNumber = serialNumber;
+        MoneyFloat = new Dictionary<int, int>();
+        Inventory = new Dictionary<Product, int>();
+    }
     public void StockItem(Product product, int quantity) // Add products to the vending machine, if the product already exists the add the new quantityelse add the new product with the new quantity
     {
         if (Inventory.ContainsKey(product))
@@ -36,7 +42,7 @@ public class VendingMachine
         MoneyFloat.Add(moneyDenomination, quantity);
     }
 
-    public void VendItem(string code, List<int> money)
+    public void VendItem(string code, List<int> money) // get code and money to vend item from the machine
     {
         List<Product> products = Inventory.Keys.ToList();
         Product p = products[0];
