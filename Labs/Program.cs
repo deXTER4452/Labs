@@ -14,11 +14,28 @@
 
 public class VendingMachine
 {
-    public int SerialNumber { get; set; }
-    public Product Product { get; set; }
-    public Dictionary<int, int> MoneyFloat { get; set; } = new Dictionary<int, int>();
-    public Dictionary<Product, int> Inventory { get; set; } = new Dictionary<Product, int>();
+    private int SerialNumber { get; set; }
+    private Dictionary<int, int> MoneyFloat { get; set; } = new Dictionary<int, int>();
+    private Dictionary<Product, int> Inventory { get; set; } = new Dictionary<Product, int>();
+    public readonly string Barcode;
     public List<Product> products { get; set; } = new List<Product>();
+    public int Counter = 0;
+
+    public VendingMachine() // constructor
+    {
+        SerialNumber = Counter++;
+        MoneyFloat = new Dictionary<int, int>();
+        Inventory = new Dictionary<Product, int>();
+
+    }
+
+    public VendingMachine(string barcode) // constructor with barcode
+    {
+        SerialNumber = Counter++;
+        MoneyFloat = new Dictionary<int, int>();
+        Inventory = new Dictionary<Product, int>();
+        Barcode = barcode;
+    }
     public void StockItem(Product product, int quantity) // Add products to the vending machine, if the product already exists the add the new quantityelse add the new product with the new quantity
     {
         if (Inventory.ContainsKey(product))
